@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import "@vuepic/vue-datepicker/dist/main.css";
 import { z } from "zod";
-import type { SResponse } from "~/../types/s-response";
+import type { SResponse } from "~/types/s-response";
 
 definePageMeta({
   layout: "form",

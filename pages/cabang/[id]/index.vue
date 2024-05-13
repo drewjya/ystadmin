@@ -61,8 +61,16 @@ onMounted(() => {
       <p>Therapist</p>
       <u-icon name="i-heroicons-arrow-right"></u-icon>
     </nuxt-link>
-    <div class="bg-blue-900 p-2 rounded-md" v-if="data.happyHour">
-      <div>Happy Hour Detail</div>
+    <div class="bg-blue-900 p-2 rounded-md text-white" v-if="data.happyHour">
+      <div class="flex gap-5 items-center">
+        <div>Happy Hour Detail</div>
+        <nuxt-link
+          class="bg-blue-950 px-4 py-1 rounded-lg hover:bg-blue-400"
+          :to="`/cabang/${id}/happyHour/edit`"
+        >
+          Edit
+        </nuxt-link>
+      </div>
       <div v-if="data.happyHour?.publicHoliday">
         Termasuk Libur Bersama atau Cuti Bersama
       </div>
@@ -71,6 +79,14 @@ onMounted(() => {
         {{ i.endHour }})
       </div>
     </div>
+    <nuxt-link
+      v-else
+      class="bg-green-500 p-1 px-3 rounded w-max justify-between items-center flex gap-4"
+      :to="`/cabang/${id}/happyHour`"
+    >
+      <p>Tambah Happy Hour</p>
+      <u-icon name="i-heroicons-plus"></u-icon>
+    </nuxt-link>
   </div>
 </template>
 

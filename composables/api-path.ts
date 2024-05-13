@@ -88,6 +88,9 @@ export default function () {
     updateHappyHour(id: number) {
       return encodeURI(`/happy-hour/${id}`);
     },
+    getHappyHour(id: number) {
+      return encodeURI(`/happy-hour/${id}`);
+    },
 
     postTherapist() {
       return encodeURI("/therapist");

@@ -1,9 +1,5 @@
 <script lang="ts" setup>
-import type { TretmentData } from "~/../types/s-response";
-
-definePageMeta({
-  layout: "form",
-});
+import type { TretmentData } from "~/types/s-response";
 
 type TherapistDetail = {
   id: number;
@@ -17,15 +13,25 @@ type TherapistDetail = {
   therapistTreatment: TretmentData[];
 };
 const therapistDetail = ref<TherapistDetail | undefined>();
-const runtime = useRuntimeConfig();
-const app = useApp();
-const route = useRoute();
-const therapistId = Number(route.params.id) ?? -1;
 
-const path = apiPath();
 const apiUrl = apiPath();
 const treatment = ref<TretmentData[]>([]);
 const notify = useNotification();
+
+const props = defineProps({
+  therapistId: {
+    type: Number,
+    required: true,
+  },
+  canAction: {
+    type: Boolean,
+    default: false,
+  },
+  to: {
+    type: String,
+    required: false,
+  },
+});
 
 onMounted(() => {
   initState();
@@ -34,7 +40,7 @@ const initState = async () => {
   therapistDetail.value = undefined;
   treatment.value = [];
   const res = await usePrivateApi<TherapistDetail>(
-    apiUrl.getTherapistDetail(therapistId),
+    apiUrl.getTherapistDetail(props.therapistId),
     {
       method: "GET",
     }
@@ -78,6 +84,7 @@ const initState = async () => {
           nama: `${e.nama} (${e.category.nama})`,
         };
       });
+    true;
   }
 };
 const router = useRouter();
@@ -93,7 +100,7 @@ const addTreatment = async () => {
   }
 
   const res = await usePrivateApi<TherapistDetail>(
-    apiUrl.addTreatmentTherapist(therapistId),
+    apiUrl.addTreatmentTherapist(props.therapistId),
     {
       method: "POST",
       body: JSON.stringify({
@@ -115,7 +122,7 @@ const addTreatment = async () => {
 
 const removeTreatment = async (treatmentId: number) => {
   const res = await usePrivateApi<TherapistDetail>(
-    apiUrl.removeTreatmentTherapist(therapistId, treatmentId),
+    apiUrl.removeTreatmentTherapist(props.therapistId, treatmentId),
     {
       method: "POST",
     }
@@ -134,7 +141,7 @@ const removeTreatment = async (treatmentId: number) => {
 
 const checkIn = async () => {
   const res = await usePrivateApi<TherapistDetail>(
-    apiUrl.postCheckIn(therapistId),
+    apiUrl.postCheckIn(props.therapistId),
     {
       method: "POST",
     }
@@ -153,7 +160,7 @@ const checkIn = async () => {
 
 const checkOut = async () => {
   const res = await usePrivateApi<TherapistDetail>(
-    apiUrl.postCheckOut(therapistId),
+    apiUrl.postCheckOut(props.therapistId),
     {
       method: "POST",
     }
@@ -209,8 +216,13 @@ const checkOut = async () => {
         @click="checkOut"
       />
     </div>
+    <nuxt-link
+      :to="props.to"
+      class="bg-yellow-200 px-2 py-1 rounded-xl w-max hover:bg-orange-500"
+      >Absensi Detail</nuxt-link
+    >
     <p>Rating {{ therapistDetail.rating }}</p>
-    <div class="flex gap-5 w-full">
+    <div class="flex gap-5 w-full" v-if="props.canAction">
       <u-select-menu
         placeholder="Tambah Treatment"
         v-if="treatment"
@@ -237,6 +249,7 @@ const checkOut = async () => {
       >
         <div>{{ i.nama }} ({{ i.category.nama }})</div>
         <u-button
+          v-if="props.canAction"
           icon="i-heroicons-x-mark-16-solid"
           class="bg-gray-800 text-white"
           size="xs"

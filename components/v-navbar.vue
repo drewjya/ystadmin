@@ -36,9 +36,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div
-    class="dark:bg-slate-900 bg-slate-400 p-4 pl-0 flex items-center h-20 text-black dark:text-white"
-  >
+  <div class="bg-default text-white p-4 pl-0 flex items-center h-20">
     <div class="md:hidden" v-if="!form">
       <button
         class="flex flex-col h-12 w-12 justify-center items-center group"
@@ -46,15 +44,15 @@ const props = defineProps({
         ref="ignoreRef"
       >
         <div
-          class="h-0.5 w-6 my-0.5 rounded-full bg-black dark:bg-white transition ease transform duration-300"
+          class="h-0.5 w-6 my-0.5 rounded-full bg-gold dark:bg-white transition ease transform duration-300"
           :class="app.isActive ? 'rotate-45 translate-y-1.5' : ''"
         ></div>
         <div
-          class="h-0.5 w-6 my-0.5 rounded-full bg-black dark:bg-white transition ease transform duration-300"
+          class="h-0.5 w-6 my-0.5 rounded-full bg-gold dark:bg-white transition ease transform duration-300"
           :class="app.isActive ? 'opacity-0' : ''"
         ></div>
         <div
-          class="h-0.5 w-6 my-0.5 rounded-full bg-black dark:bg-white transition ease transform duration-300"
+          class="h-0.5 w-6 my-0.5 rounded-full bg-gold dark:bg-white transition ease transform duration-300"
           :class="app.isActive ? '-rotate-45 -translate-y-1.5' : ''"
         ></div>
         <div v-auto-animate>
@@ -64,7 +62,7 @@ const props = defineProps({
             v-on-click-outside="onClickOutsideHandler"
           >
             <div
-              class="absolute dark:bg-slate-900 bg-slate-400 h-[calc(100vh-80px)] w-40 z-50 flex flex-col justify-between pb-4 top-[31px] -left-[24px]"
+              class="absolute bg-default h-[calc(100vh-80px)] w-40 z-50 flex flex-col justify-between pb-4 top-[31px] -left-[24px]"
             >
               <v-link />
             </div>
@@ -83,9 +81,9 @@ const props = defineProps({
         size="lg"
       />
     </div>
-    <div class="flex items-center justify-between w-full">
-      <h1 class="text-2xl font-bold ml-5">YST Family</h1>
-      <s-theme />
+    <div class="flex items-center gap-4 w-full px-5">
+      <img src="/logo.png" alt="logo" class="w-14" />
+      <h1 class="text font-bold text-gold font-sans">YST Family</h1>
     </div>
   </div>
 </template>

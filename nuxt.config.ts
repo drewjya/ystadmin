@@ -1,11 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-
+  devtools: { enabled: false },
+  css: ["~/assets/main.css"],
   devServer: {
     port: 4444,
   },
-
+  colorMode: { preference: "light", fallback: "light" },
   modules: [
     "@nuxt/ui",
     "@vueuse/motion/nuxt",

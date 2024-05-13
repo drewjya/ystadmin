@@ -5,7 +5,7 @@ const auth = useApp();
 <template>
   <div class="hidden md:block">
     <div
-      class="h-full flex flex-col dark:bg-slate-900 bg-slate-400 pb-8 justify-between items-center"
+      class="h-full flex flex-col bg-default text-white pb-8 justify-between items-center"
     >
       <div class="pb-4 flex flex-col justify-between w-40">
         <v-link />

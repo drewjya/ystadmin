@@ -12,7 +12,7 @@ const auth = useApp();
       </div>
       <div class="px-4 w-full">
         <u-button
-          class="w-full justify-center bg-gold text-default"
+          class="w-full justify-center bg-gold text-default hover:bg-default border border-default hover:border-gold hover:text-gold"
           dynamic
           icon="i-solar-logout-2-bold"
           @click="auth.logout()"

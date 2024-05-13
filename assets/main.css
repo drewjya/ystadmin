@@ -24,10 +24,32 @@
 .border-default {
   border-color: #462722;
 }
+.hover\:border-default:hover {
+  border-color: #462722;
+}
 
+.hover\:border-gold:hover {
+  border-color: #ffe195;
+}
 .hover\:bg-gold:hover {
   background-color: #ffe195;
 }
 .hover\:bg-default:hover {
   background-color: #462722;
+}
+
+.bg-lbrown {
+  background-color: #f1e7ce;
+}
+
+.text-lbrown {
+  color: #f1e7ce;
+}
+
+.hover\:bg-lbrown:hover {
+  background-color: #f1e7ce;
+}
+
+.hover\:text-lbrown:hover {
+  color: #f1e7ce;
 }

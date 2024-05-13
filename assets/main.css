@@ -4,9 +4,30 @@
 .text-default {
   color: #462722;
 }
+.hover\:text-gold:hover {
+  color: #ffe195;
+}
+.hover\:text-default:hover {
+  color: #462722;
+}
 .bg-gold {
   background-color: #ffe195;
 }
 .bg-default {
+  background-color: #462722;
+}
+
+.border-gold {
+  border-color: #ffe195;
+}
+
+.border-default {
+  border-color: #462722;
+}
+
+.hover\:bg-gold:hover {
+  background-color: #ffe195;
+}
+.hover\:bg-default:hover {
   background-color: #462722;
 }

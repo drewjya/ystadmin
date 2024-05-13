@@ -43,13 +43,17 @@ const getItem = (val: any, key: string) => {
 
 <template>
   <div
-    class="w-full overflow-x-auto border dark:border-gray-400 overflow-y-auto max-height"
+    class="w-full overflow-x-auto overflow-y-auto max-height text-default font-sans text-sm"
   >
     <div class="w-full">
-      <div class="grid-row">
+      <div class="grid-row text-gold">
         <div
           v-for="(column, index) in columns"
-          class="dark:bg-slate-900 text-black dark:text-white py-2 text-center border dark:border-gray-400 bg-slate-300"
+          class="py-2 text-center bg-default"
+          :class="
+            (index === 0 ? 'rounded-l-xl' : '') +
+            (index === columns.length - 1 ? 'rounded-r-xl' : '')
+          "
         >
           {{ column.label }}
         </div>
@@ -62,7 +66,7 @@ const getItem = (val: any, key: string) => {
             v-for="(column, index) in columns.filter(
               (col) => col.type !== ColumnType.ACTION
             )"
-            class="dark:bg-slate-700 text-black dark:text-white py-2 text-center border dark:border-gray-400"
+            class="py-2 text-center border-b border-default flex items-center justify-center"
           >
             <img
               v-if="
@@ -96,7 +100,7 @@ const getItem = (val: any, key: string) => {
           </nuxt-link>
           <div
             v-if="columns.map((e) => e.type).includes(ColumnType.ACTION)"
-            class="dark:bg-slate-700 text-black dark:text-white py-2 text-center border dark:border-gray-400"
+            class="border-b border-default flex items-center justify-center"
           >
             <p class="flex justify-center gap-5">
               <u-button

@@ -12,11 +12,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <nuxt-link
-    :to="to"
-    class="dark:bg-blue-600 bg-blue-900 text-white p-2 rounded w-max hover:bg-blue-600 dark:hover:bg-blue-900"
-    >{{ label }}</nuxt-link
-  >
+  <nuxt-link :to="to" class="p-2 rounded w-max hover:bg-gold hover:text-default">{{
+    label
+  }}</nuxt-link>
 </template>
 
 <style scoped></style>

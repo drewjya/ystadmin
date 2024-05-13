@@ -46,7 +46,11 @@ const { data, error, refresh, pending } = await useFetch(url, {
 
 <template>
   <div class="flex flex-col gap-2">
-    <n-link label="Add Banner" to="/banner/add" />
+    <n-link
+      label="Add Banner"
+      to="/banner/add"
+      class="bg-default text-gold text-sm px-5 rounded-lg"
+    />
 
     <v-table
       :columns="[

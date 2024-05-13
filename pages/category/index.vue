@@ -29,7 +29,11 @@ const onDelete = async (itemId: number) => {
 
 <template>
   <div class="flex flex-col gap-2">
-    <n-link label="Add Category" to="/category/add" />
+    <n-link
+      label="Add Category"
+      to="/category/add"
+      class="bg-default text-gold text-sm px-5 rounded-lg"
+    />
     <v-table
       :columns="[
         {

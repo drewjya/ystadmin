@@ -77,7 +77,7 @@ const props = defineProps({
         solid
         @click="$router.go(-1)"
         square
-        class="hover:!bg-red-900 rounded-md ml-4 bg-white text-red-950 hover:text-white"
+        class="bg-default text-gold rounded-md ml-4 hover:bg-[#ffe195] hover:text-[#462722]"
         size="lg"
       />
     </div>

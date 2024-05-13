@@ -76,7 +76,11 @@ const onDelete = async (itemId: number) => {
 
 <template>
   <div class="flex flex-col gap-2">
-    <n-link label="Add Therapist" to="/therapist/add" />
+    <n-link
+      label="Add Therapist"
+      to="/therapist/add"
+      class="bg-default text-gold text-sm px-5 rounded-lg"
+    />
     <v-table
       :to="(item) => `/therapist/detail/${item.id}`"
       :on-edit="(item) => $router.push(`/therapist/edit/${item.id}`)"

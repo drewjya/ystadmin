@@ -10,47 +10,6 @@ const route = useRoute();
 
 const cabangId = Number(route.params.cabangId) ?? -1;
 
-const extractHourMinutesDate = (param: string) => {
-  const val = param.split(":");
-  console.log(val, "VAL");
-
-  if (val.length !== 3) {
-    return {
-      hours: 9,
-      minutes: 0,
-      seconds: 0,
-    };
-  } else {
-    console.log(
-      {
-        hours: parseInt(val[0]),
-        minutes: parseInt(val[1]),
-        seconds: parseInt(val[2]),
-      },
-      "VAL"
-    );
-
-    return {
-      hours: parseInt(val[0]),
-      minutes: parseInt(val[1]),
-      seconds: parseInt(val[2]),
-    };
-  }
-};
-
-const toStringHour = (param: {
-  hours: number;
-  minutes: number;
-  seconds: number;
-}) => {
-  function convert(params: number) {
-    return params < 10 ? `0${params}` : params;
-  }
-  return `${convert(param.hours)}:${convert(param.minutes)}:${convert(
-    param.seconds
-  )}`;
-};
-
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",

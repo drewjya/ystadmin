@@ -35,6 +35,8 @@ const formD = useFormd({
 definePageMeta({
   layout: "auth",
 });
+
+const isPassword = ref(true)
 </script>
 
 <template>
@@ -43,8 +45,14 @@ definePageMeta({
       <u-input v-model="formD.state.email" />
     </u-form-group>
     <u-form-group label="Password" name="password">
-      <u-input v-model="formD.state.password" type="password" />
+      <u-button-group class="w-full" orientation="horizontal">
+        <u-input v-model="formD.state.password" :type="isPassword?`password`:'text'" class="w-full"  />
+        
+
+        <u-button :icon="isPassword ?`i-heroicons-eye-slash-solid`:`i-heroicons-eye-solid`" color="gray" @click="isPassword=!isPassword" />
+      </u-button-group>
     </u-form-group>
+    
     <u-button
       label="Submit"
       type="button"

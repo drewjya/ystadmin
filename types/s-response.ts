@@ -13,7 +13,7 @@ export type CategoryProduct = {
 export type TretmentData = {
   id: number;
   nama: string;
-  durasi: string;
+  durasi: number;
   category: {
     id: number;
     nama: string;

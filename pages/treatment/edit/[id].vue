@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { z } from "zod";
-import type { CategoryProduct } from "~/types/s-response";
+import type { CategoryProduct, TretmentData } from "~/types/s-response";
 
 definePageMeta({
   layout: "form",
@@ -13,7 +13,9 @@ const path = apiPath();
 const apiUrl = apiPath();
 const cabangs = ref<CategoryProduct[]>([]);
 const notify = useNotification();
-
+const route = useRoute();
+const treatmentId = Number(route.params.id) ?? -1;
+const treatmentUrl = computed(() => apiPath().getTreatmentDetail(treatmentId));
 onMounted(() => {
   initState();
 });
@@ -27,6 +29,7 @@ const initState = async () => {
       },
     }
   );
+
   console.log(json);
   if (json.status < 400) {
     if (!json.data) {
@@ -38,7 +41,28 @@ const initState = async () => {
     }
     cabangs.value = json.data;
   }
-  
+  const treatmentDetail = await usePrivateApi<TretmentData>(
+    runtime.public.baseUrl + treatmentUrl.value,
+    {
+      method: "GET",
+      
+    }
+  );
+  console.log(treatmentDetail);
+  if (treatmentDetail.status < 400) {
+    if (!treatmentDetail.data) {
+      notify.info({
+        message:
+          "Treatment Tidak Ditemukan",
+      });
+      router.go(-1);
+      return;
+    }
+    formD.state.nama = treatmentDetail.data.nama;
+    formD.state.durasi = treatmentDetail.data.durasi;
+    formD.state.categoryId = treatmentDetail.data.category.id
+    
+  }
 };
 const router = useRouter();
 const formD = useFormd({
@@ -65,9 +89,9 @@ const formD = useFormd({
 
   onSubmit: async (event, d) => {
     const data = await usePrivateApi(
-      runtime.public.baseUrl + path.postTreatment(),
+      runtime.public.baseUrl + path.updateTreatment(treatmentId),
       {
-        method: "POST",
+        method: "PUT",
         body: event.data,
       }
     );

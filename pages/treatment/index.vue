@@ -65,6 +65,7 @@ const onDelete = async (itemId: number) => {
         },
       ]"
       :items="data?.value"
+      :on-edit="(item) => $router.push(`/treatment/edit/${item.id}`)"
       :on-delete="(item) => onDelete(item.id)"
     />
   </div>

@@ -42,6 +42,9 @@ export default function () {
     getTreatment() {
       return encodeURI("/treatment");
     },
+    getTreatmentDetail(id: number) {
+      return encodeURI("/treatment"+`/${id}`);
+    },
     deleteTreatment(id: number) {
       return encodeURI(`/treatment/${id}`);
     },

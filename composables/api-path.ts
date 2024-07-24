@@ -42,6 +42,9 @@ export default function () {
     getTreatment() {
       return encodeURI("/treatment");
     },
+    getTags() {
+      return encodeURI("/treatment/tags");
+    },
     getTreatmentDetail(id: number) {
       return encodeURI("/treatment"+`/${id}`);
     },
@@ -106,6 +109,9 @@ export default function () {
     },
     getTherapistDetail(id: number) {
       return encodeURI(`/therapist/${id}`);
+    },
+    uploadTherapistSkillTags() {
+      return encodeURI('/upload/skilltag');
     },
     updateTherapist(id: number) {
       return encodeURI(`/therapist/${id}`);

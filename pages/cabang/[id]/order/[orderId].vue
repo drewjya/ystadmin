@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { OrderData, SResponse } from "~/types/s-response";
 import { OrderStatus } from "~/composables/api-path";
+import type { OrderData, SResponse } from "~/types/s-response";
 import { ColumnType } from "~/types/t-table";
 
 const runtime = useRuntimeConfig();
@@ -36,7 +36,7 @@ const { data, error, refresh, pending } = await useFetch(url, {
       <div class="flex gap-2">
         <u-select-menu
           v-model="status"
-          :options="OrderStatus"
+          :options="[OrderStatus.CANCELLED, ]"
           class="grow"
           placeholder="Order Status"
         ></u-select-menu>

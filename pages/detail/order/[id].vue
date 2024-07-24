@@ -124,12 +124,12 @@ onMounted(() => {
           :value="formatPrice(`${data.totalPrice}`)"
         />
       </div>
-      <div class="flex flex-col gap-4" v-if="data.picture">
+      <div class="flex flex-col gap-4" >
         <u-button
           @click="onSubmit(OrderStatus.CONFIRMED)"
           v-if="
-            data.orderStatus === OrderStatus.PENDING ||
-            data.orderStatus === OrderStatus.RESCHEDULE
+            (data.orderStatus === OrderStatus.PENDING ||
+            data.orderStatus === OrderStatus.RESCHEDULE) && data.picture
           "
           size="sm"
           class="px-1 py-2 h-max justify-center"
@@ -138,28 +138,28 @@ onMounted(() => {
         <u-button
           size="sm"
           @click="onSubmit(OrderStatus.CANCELLED)"
-          v-if="data.orderStatus === OrderStatus.PENDING"
+          v-if="(data.orderStatus === OrderStatus.PENDING) && !data.picture"
           class="px-1 py-2 h-max justify-center"
           label="Batalkan Order"
         />
         <u-button
           size="sm"
           @click="onSubmit(OrderStatus.RESCHEDULE)"
-          v-if="data.orderStatus === OrderStatus.CONFIRMED"
+          v-if="data.orderStatus === OrderStatus.CONFIRMED && data.picture"
           class="px-1 py-2 h-max justify-center"
           label="Reschedule Order"
         />
         <u-button
           size="sm"
           @click="onSubmit(OrderStatus.ONGOING)"
-          v-if="data.orderStatus === OrderStatus.CONFIRMED"
+          v-if="data.orderStatus === OrderStatus.CONFIRMED && data.picture"
           class="px-1 py-2 h-max justify-center"
           label="Jalankan Order"
         />
         <u-button
           @click="onSubmit(OrderStatus.COMPLETE)"
           size="sm"
-          v-if="data.orderStatus === OrderStatus.ONGOING"
+          v-if="data.orderStatus === OrderStatus.ONGOING && data.picture"
           class="px-1 py-2 h-max justify-center"
           label="Selesaikan Order"
         />

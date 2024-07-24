@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { TretmentData } from "~/types/s-response";
+import type { TagsData, TretmentData } from "~/types/s-response";
 
 type TherapistDetail = {
   id: number;
@@ -10,12 +10,17 @@ type TherapistDetail = {
     checkOut?: string;
   };
   rating: number;
+  tags: {
+    name: string;
+    id: number;
+    treatments: TretmentData[];
+  }[];
   therapistTreatment: TretmentData[];
 };
 const therapistDetail = ref<TherapistDetail | undefined>();
 
 const apiUrl = apiPath();
-const treatment = ref<TretmentData[]>([]);
+const treatment = ref<TagsData[]>([]);
 const notify = useNotification();
 
 const props = defineProps({
@@ -58,7 +63,7 @@ const initState = async () => {
     therapistDetail.value = res.data;
   }
 
-  const json = await usePrivateApi<TretmentData[]>(apiUrl.getTreatment(), {
+  const json = await usePrivateApi<TagsData[]>(apiUrl.getTags(), {
     method: "GET",
   });
 
@@ -73,15 +78,12 @@ const initState = async () => {
     }
     treatment.value = json.data
       ?.filter(
-        (i) =>
-          !therapistDetail.value?.therapistTreatment
-            .map((j) => j.id)
-            .includes(i.id)
+        (i) => !therapistDetail.value?.tags.map((j) => j.id).includes(i.id)
       )
       .map((e) => {
         return {
           ...e,
-          nama: `${e.nama} (${e.category.nama})`,
+          nama: `${e.name}`,
         };
       });
     true;
@@ -89,10 +91,10 @@ const initState = async () => {
 };
 const router = useRouter();
 
-const selectedTreatment = ref();
+const selectedTags = ref();
 
 const addTreatment = async () => {
-  if (!selectedTreatment.value) {
+  if (!selectedTags.value) {
     notify.error({
       message: "Treatment Harus Dipilih",
     });
@@ -104,7 +106,7 @@ const addTreatment = async () => {
     {
       method: "POST",
       body: JSON.stringify({
-        treatmentId: selectedTreatment.value,
+        tagsId: selectedTags.value,
       }),
     }
   );
@@ -226,7 +228,7 @@ const checkOut = async () => {
       <u-select-menu
         placeholder="Tambah Treatment"
         v-if="treatment"
-        v-model="selectedTreatment"
+        v-model="selectedTags"
         class="w-full"
         value-attribute="id"
         option-attribute="nama"
@@ -243,19 +245,12 @@ const checkOut = async () => {
     </div>
 
     <div class="grid grid-cols-2 text-sm gap-2 mt-4">
-      <div
-        v-for="i in therapistDetail.therapistTreatment"
-        class="bg-gray-500 rounded-lg p-2 flex justify-between items-center"
-      >
-        <div>{{ i.nama }} ({{ i.category.nama }})</div>
-        <u-button
-          v-if="props.canAction"
-          icon="i-heroicons-x-mark-16-solid"
-          class="bg-gray-800 text-white"
-          size="xs"
-          @click="() => removeTreatment(i.id)"
-        />
-      </div>
+      <ExpansionItem
+        v-for="i in therapistDetail.tags"
+        :items="i.treatments.map((e) => e.nama + ` (${e.category.nama})`)"
+        :label="i.name"
+        :on-delete="() => removeTreatment(i.id)"
+      />
     </div>
   </div>
 </template>

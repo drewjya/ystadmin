@@ -10,6 +10,14 @@ export type CategoryProduct = {
   nama: string;
 };
 
+
+export type TagsData = {
+  id: number;
+  name: string;
+};
+
+
+
 export type TretmentData = {
   id: number;
   nama: string;
@@ -24,6 +32,7 @@ export type TretmentData = {
 
 export type TherapistData = {
   id: number;
+  no: string;
   nama: string;
   gender: string;
   attendance?: {
